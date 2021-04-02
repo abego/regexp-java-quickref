@@ -15,21 +15,19 @@
         }
 
         table {
-            border: 0.2em;
             border-spacing: 0;
             break-inside: avoid-column;
             margin-bottom: 1em;
-            border-style: solid;
+            border: 0.2em solid;
             border-top-style: none;
             width: 100%;
         }
 
         caption {
             padding-left: 2px;
-            border: 0.2em;
             text-align: left;
             font-weight: bold;
-            border-style: solid;
+            border: 0.2em solid;
             border-bottom-style: none;
         }
 
@@ -42,7 +40,7 @@
         }
 
         th {
-            white-space: nowrap;
+            display: none;
         }
 
         code {
@@ -142,6 +140,10 @@
     <caption>Characters</caption>
     <tbody>
     <tr>
+        <th scope="col">Expression</th>
+        <th scope="col">Meaning</th>
+    </tr>
+    <tr>
         <td><em>x</em></td>
         <td>The character <em>x</em></td>
     </tr>
@@ -219,6 +221,10 @@
     <caption>Character classes</caption>
     <tbody>
     <tr>
+        <th scope="col">Expression</th>
+        <th scope="col">Meaning</th>
+    </tr>
+    <tr>
         <td><code>[abc]</code></td>
         <td><code>a</code>, <code>b</code>, or <code>c</code> (simple class)</td>
     </tr>
@@ -261,6 +267,10 @@
     <caption>Predefined character classes</caption>
     <tbody>
     <tr>
+        <th scope="col">Expression</th>
+        <th scope="col">Meaning</th>
+    </tr>
+    <tr>
         <td><code>.</code></td>
         <td>line terminators)</td>
     </tr>
@@ -295,6 +305,10 @@
 <table class="predefchar">
     <caption>POSIX character classes (US-ASCII only)</caption>
     <tbody>
+    <tr>
+        <th scope="col">Expression</th>
+        <th scope="col">Meaning</th>
+    </tr>
     <tr>
         <td><code>\p{Lower}</code></td>
         <td>A lower-case alphabetic character: <code>[a-z]</code></td>
@@ -354,7 +368,10 @@
 <table class="predefchar">
     <caption>java.lang.Character classes (simple java character type)</caption>
     <tbody>
-
+    <tr>
+        <th scope="col">Expression</th>
+        <th scope="col">Meaning</th>
+    </tr>
     <tr>
         <td><code>\p{javaLowerCase}</code></td>
         <td>Equivalent to Character.isLowerCase()</td>
@@ -378,6 +395,10 @@
 <table class="predefchar">
     <caption>Classes for Unicode scripts, blocks, categories and binary properties</caption>
     <tbody>
+    <tr>
+        <th scope="col">Expression</th>
+        <th scope="col">Meaning</th>
+    </tr>
     <tr>
         <td><code>\p{IsLatin}</code></td>
         <td>A Latin script character</td>
@@ -414,6 +435,10 @@
     <caption>Logical operators</caption>
     <tbody>
     <tr>
+        <th scope="col">Expression</th>
+        <th scope="col">Meaning</th>
+    </tr>
+    <tr>
         <td><em>XY</em></td>
         <td><em>X</em> followed by <em>Y</em></td>
     </tr>
@@ -432,6 +457,10 @@
 <table class="ops">
     <caption>Greedy quantifiers</caption>
     <tbody>
+    <tr>
+        <th scope="col">Expression</th>
+        <th scope="col">Meaning</th>
+    </tr>
     <tr>
         <td><em>X</em><code>?</code></td>
         <td><em>X</em>, once or not at all</td>
@@ -463,7 +492,10 @@
 <table class="ops">
     <caption>Reluctant quantifiers</caption>
     <tbody>
-
+    <tr>
+        <th scope="col">Expression</th>
+        <th scope="col">Meaning</th>
+    </tr>
     <tr>
         <td><em>X</em><code>??</code></td>
         <td><em>X</em>, once or not at all</td>
@@ -495,7 +527,10 @@
 <table class="ops">
     <caption>Possessive quantifiers</caption>
     <tbody>
-
+    <tr>
+        <th scope="col">Expression</th>
+        <th scope="col">Meaning</th>
+    </tr>
     <tr>
         <td><em>X</em><code>?+</code></td>
         <td><em>X</em>, once or not at all</td>
@@ -527,6 +562,10 @@
 <table class="other">
     <caption>Boundary matchers</caption>
     <tbody>
+    <tr>
+        <th scope="col">Expression</th>
+        <th scope="col">Meaning</th>
+    </tr>
     <tr>
         <td><code>^</code></td>
         <td>The beginning of a line</td>
@@ -568,7 +607,10 @@
 <table class="other">
     <caption>Back references</caption>
     <tbody>
-
+    <tr>
+        <th scope="col">Expression</th>
+        <th scope="col">Meaning</th>
+    </tr>
     <tr>
         <td><code>\</code><em>n</em></td>
         <td>Whatever the <em>n</em><sup>th</sup>capturing group matched
@@ -587,7 +629,10 @@
 <table class="other">
     <caption>Quotation</caption>
     <tbody>
-
+    <tr>
+        <th scope="col">Expression</th>
+        <th scope="col">Meaning</th>
+    </tr>
     <tr>
         <td><code>\</code></td>
         <td>Nothing, but quotes the following character</td>
@@ -608,7 +653,10 @@
 <table class="special">
     <caption>Special constructs (named-capturing and non-capturing)</caption>
     <tbody>
-
+    <tr>
+        <th scope="col">Expression</th>
+        <th scope="col">Meaning</th>
+    </tr>
     <tr>
         <td><code>(?&lt;name&gt;</code><em>X</em><code>)</code></td>
         <td><em>X</em>, as a named-capturing group</td>
@@ -668,7 +716,7 @@
     </tbody>
 </table>
 Reference: <a href="https://docs.oracle.com/javase/8/docs/api/java/util/regex/Pattern.html" target="_blank">
-        Pattern Class (Java 8 JavaDoc)</a><br>
+    Pattern Class (Java 8 JavaDoc)</a><br>
 Github: <a href="https://github.com/abego/regexp-java-quickref" target="_blank">https://github.com/abego/regexp-java-quickref</a>
 
 </body>
