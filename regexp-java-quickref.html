@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="Description" content="Java Regular Expression Quick Reference (by abego Software)">
+    <meta name="keywords"
+          content="Regular Expression, Reguläre Ausdrücke, regexp, regex, Java, Pattern, java.util.regex.Pattern, Quick Reference, QuickRef, Cheat Sheet, cheatsheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java Regular Expression Quick Reference</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            font-size: 0.9em;
+            column-count: 4;
+        }
+
+        table {
+            border: 0.2em;
+            border-spacing: 0;
+            break-inside: avoid-column;
+            margin-bottom: 1em;
+            border-style: solid;
+            border-top-style: none;
+            width: 100%;
+        }
+
+        caption {
+            padding-left: 2px;
+            border: 0.2em;
+            text-align: left;
+            font-weight: bold;
+            border-style: solid;
+            border-bottom-style: none;
+        }
+
+        tr {
+            vertical-align: top;
+        }
+
+        td:nth-child(2) {
+            padding-left: 1em;
+        }
+
+        th {
+            white-space: nowrap;
+        }
+
+        code {
+            white-space: nowrap
+        }
+
+        a:link, a:visited {
+            color: black;
+        }
+
+        .char, .char caption {
+            border-color: orange;
+            background: rgba(245, 139, 17, 0.2);
+        }
+
+        .predefchar, .predefchar caption {
+            border-color: #f5d501;
+            background: rgba(245, 212, 2, 0.2);
+        }
+
+        .ops, .ops caption {
+            border-color: #05dc70;
+            background: rgba(5, 220, 112, 0.2);
+        }
+
+        .other, .other caption {
+            border-color: #03acdc;
+            background: rgba(3, 172, 220, 0.2);
+        }
+
+        .special, .special caption {
+            border-color: #dc4d8a;
+            background: rgba(220, 77, 138, 0.2);
+        }
+
+
+        @media (max-width: 1400px) {
+            body {
+                column-count: 3;
+            }
+        }
+
+        @media (max-width: 1000px) {
+            body {
+                column-count: 2;
+            }
+        }
+
+        @media (max-width: 780px) {
+            body {
+                column-count: 1;
+            }
+        }
+
+        /* Tooltip container */
+        .tooltip {
+            position: relative;
+            display: inline-block;
+            border-bottom: 1px dotted lightgrey; /* dots under the text */
+        }
+
+        /* Tooltip text */
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 120px;
+            background-color: #e6e6e6;
+            color: black;
+            text-align: center;
+            padding: 5px 0;
+            border-radius: 3px;
+
+            /* Position the tooltip text - see examples below! */
+            position: absolute;
+            z-index: 1;
+        }
+
+        /* Show the tooltip text when you mouse over the tooltip container */
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+        }
+
+        .tooltip .tooltiptext {
+            bottom: 110%;
+            right: 110%;
+        }
+
+    </style>
+</head>
+<body>
+<h1>Java Regular Expression Quick Reference</h1>
+<p><a href="https://abego.org/ref/regexp-java-quickref.html" target="_blank">https://abego.org/ref/regexp-java-quickref.html</a></p>
+<table class="char">
+    <caption>Characters</caption>
+    <tbody>
+    <tr>
+        <td><em>x</em></td>
+        <td>The character <em>x</em></td>
+    </tr>
+    <tr>
+        <td><code>\\</code></td>
+        <td>The backslash character</td>
+    </tr>
+    <tr>
+        <td><code>\0</code><em>n</em></td>
+        <td>The character with octal value <code>0</code><em>n</em>
+            (0&nbsp;<code>&lt;=</code>&nbsp;<em>n</em>&nbsp;<code>&lt;=</code>&nbsp;7)
+        </td>
+    </tr>
+    <tr>
+        <td><code>\0</code><em>nn</em></td>
+        <td>The character with octal value <code>0</code><em>nn</em>
+            (0&nbsp;<code>&lt;=</code>&nbsp;<em>n</em>&nbsp;<code>&lt;=</code>&nbsp;7)
+        </td>
+    </tr>
+    <tr>
+        <td><code>\0</code><em>mnn</em></td>
+        <td>The character with octal value <code>0</code><em>mnn</em><br>
+            (0&nbsp;<code>&lt;=</code>&nbsp;<em>m</em>&nbsp;<code>&lt;=</code>&nbsp;3,
+            0&nbsp;<code>&lt;=</code>&nbsp;<em>n</em>&nbsp;<code>&lt;=</code>&nbsp;7)
+        </td>
+    </tr>
+    <tr>
+        <td><code>\x</code><em>hh</em></td>
+        <td>The character with hexadecimal&nbsp;value&nbsp;<code>0x</code><em>hh</em></td>
+    </tr>
+    <tr>
+        <td><code>\u</code><em>hhhh</em></td>
+        <td>The character with hexadecimal&nbsp;value&nbsp;<code>0x</code><em>hhhh</em></td>
+    </tr>
+    <tr>
+        <td><code>\x</code><em>{h...h}</em></td>
+        <td>The character with hexadecimal&nbsp;value&nbsp;<code>0x</code><em>h...h</em>
+            (<code>Character.MIN_CODE_POINT</code>
+            &nbsp;&lt;=&nbsp;<code>0x</code><em>h...h</em>&nbsp;&lt;=&nbsp;
+            <code>Character.MAX_CODE_POINT</code>)
+        </td>
+    </tr>
+    <tr>
+        <td><code>\t</code></td>
+        <td>The tab character (<code>'\u0009'</code>)</td>
+    </tr>
+    <tr>
+        <td><code>\n</code></td>
+        <td>The newline (line feed) character (<code>'\u000A'</code>)</td>
+    </tr>
+    <tr>
+        <td><code>\r</code></td>
+        <td>The carriage-return character (<code>'\u000D'</code>)</td>
+    </tr>
+    <tr>
+        <td><code>\f</code></td>
+        <td>The form-feed character (<code>'\u000C'</code>)</td>
+    </tr>
+    <tr>
+        <td><code>\a</code></td>
+        <td>The alert (bell) character (<code>'\u0007'</code>)</td>
+    </tr>
+    <tr>
+        <td><code>\e</code></td>
+        <td>The escape character (<code>'\u001B'</code>)</td>
+    </tr>
+    <tr>
+        <td><code>\c</code><em>x</em></td>
+        <td>The control character corresponding to <em>x</em></td>
+    </tr>
+    </tbody>
+</table>
+
+<table class="char">
+    <caption>Character classes</caption>
+    <tbody>
+    <tr>
+        <td><code>[abc]</code></td>
+        <td><code>a</code>, <code>b</code>, or <code>c</code> (simple class)</td>
+    </tr>
+    <tr>
+        <td><code>[^abc]</code></td>
+        <td>Any character except <code>a</code>, <code>b</code>, or <code>c</code> (negation)</td>
+    </tr>
+    <tr>
+        <td><code>[a-zA-Z]</code></td>
+        <td><code>a</code> through <code>z</code>
+            or <code>A</code> through <code>Z</code>, inclusive (range)
+        </td>
+    </tr>
+    <tr>
+        <td><code>[a-d[m-p]]</code></td>
+        <td><code>a</code> through <code>d</code>,
+            or <code>m</code> through <code>p</code>: <code>[a-dm-p]</code> (union)
+        </td>
+    </tr>
+    <tr>
+        <td><code>[a-z&amp;&amp;[def]]</code></td>
+        <td><code>d</code>, <code>e</code>, or <code>f</code> (intersection)</td>
+    </tr>
+    <tr>
+        <td><code>[a-z&amp;&amp;[^bc]]</code></td>
+        <td><code>a</code> through <code>z</code>,
+            except for <code>b</code> and <code>c</code>: <code>[ad-z]</code> (subtraction)
+        </td>
+    </tr>
+    <tr>
+        <td><code>[a-z&amp;&amp;[^m-p]]</code></td>
+        <td><code>a</code> through <code>z</code>,
+            and not <code>m</code> through <code>p</code>: <code>[a-lq-z]</code>(subtraction)
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<table class="predefchar">
+    <caption>Predefined character classes</caption>
+    <tbody>
+    <tr>
+        <td><code>.</code></td>
+        <td>line terminators)</td>
+    </tr>
+    <tr>
+        <td><code>\d</code></td>
+        <td>A digit: <code>[0-9]</code></td>
+    </tr>
+    <tr>
+        <td><code>\D</code></td>
+        <td>A non-digit: <code>[^0-9]</code></td>
+    </tr>
+    <tr>
+        <td><code>\s</code></td>
+        <td>A whitespace character: <code>[ \t\n\x0B\f\r]</code></td>
+    </tr>
+    <tr>
+        <td><code>\S</code></td>
+        <td>A non-whitespace character: <code>[^\s]</code></td>
+    </tr>
+    <tr>
+        <td><code>\w</code></td>
+        <td>A word character: <code>[a-zA-Z_0-9]</code></td>
+    </tr>
+    <tr>
+        <td><code>\W</code></td>
+        <td>A non-word character: <code>[^\w]</code></td>
+    </tr>
+
+    </tbody>
+</table>
+
+<table class="predefchar">
+    <caption>POSIX character classes (US-ASCII only)</caption>
+    <tbody>
+    <tr>
+        <td><code>\p{Lower}</code></td>
+        <td>A lower-case alphabetic character: <code>[a-z]</code></td>
+    </tr>
+    <tr>
+        <td><code>\p{Upper}</code></td>
+        <td>An upper-case alphabetic character:<code>[A-Z]</code></td>
+    </tr>
+    <tr>
+        <td><code>\p{ASCII}</code></td>
+        <td>All ASCII:<code>[\x00-\x7F]</code></td>
+    </tr>
+    <tr>
+        <td><code>\p{Alpha}</code></td>
+        <td>An alphabetic character:<code>[\p{Lower}\p{Upper}]</code></td>
+    </tr>
+    <tr>
+        <td><code>\p{Digit}</code></td>
+        <td>A decimal digit: <code>[0-9]</code></td>
+    </tr>
+    <tr>
+        <td><code>\p{Alnum}</code></td>
+        <td>An alphanumeric character:<code>[\p{Alpha}\p{Digit}]</code></td>
+    </tr>
+    <tr>
+        <td><code>\p{Punct}</code></td>
+        <td><code>#$%&amp;'()*+,-./:;&lt;=&gt;?@[\]^_`{|}~</code></td>
+    </tr>
+    <tr>
+        <td><code>\p{Graph}</code></td>
+        <td>A visible character: <code>[\p{Alnum}\p{Punct}]</code></td>
+    </tr>
+    <tr>
+        <td><code>\p{Print}</code></td>
+        <td>A printable character: <code>[\p{Graph}\x20]</code></td>
+    </tr>
+    <tr>
+        <td><code>\p{Blank}</code></td>
+        <td>A space or a tab: <code>[ \t]</code></td>
+    </tr>
+    <tr>
+        <td><code>\p{Cntrl}</code></td>
+        <td>A control character: <code>[\x00-\x1F\x7F]</code></td>
+    </tr>
+    <tr>
+        <td><code>\p{XDigit}</code></td>
+        <td>A hexadecimal digit: <code>[0-9a-fA-F]</code></td>
+    </tr>
+    <tr>
+        <td><code>\p{Space}</code></td>
+        <td>A whitespace character: <code>[ \t\n\x0B\f\r]</code></td>
+    </tr>
+
+    </tbody>
+</table>
+
+<table class="predefchar">
+    <caption>java.lang.Character classes (simple java character type)</caption>
+    <tbody>
+
+    <tr>
+        <td><code>\p{javaLowerCase}</code></td>
+        <td>Equivalent to Character.isLowerCase()</td>
+    </tr>
+    <tr>
+        <td><code>\p{javaUpperCase}</code></td>
+        <td>Equivalent to Character.isUpperCase()</td>
+    </tr>
+    <tr>
+        <td><code>\p{javaWhitespace}</code></td>
+        <td>Equivalent to Character.isWhitespace()</td>
+    </tr>
+    <tr>
+        <td><code>\p{javaMirrored}</code></td>
+        <td>Equivalent to Character.isMirrored()</td>
+    </tr>
+
+    </tbody>
+</table>
+
+<table class="predefchar">
+    <caption>Classes for Unicode scripts, blocks, categories and binary properties</caption>
+    <tbody>
+    <tr>
+        <td><code>\p{IsLatin}</code></td>
+        <td>A Latin script character</td>
+    </tr>
+    <tr>
+        <td><code>\p{InGreek}</code></td>
+        <td>A character in the Greek block)</td>
+    </tr>
+    <tr>
+        <td><code>\p{Lu}</code></td>
+        <td>An uppercase letter</td>
+    </tr>
+    <tr>
+        <td><code>\p{IsAlphabetic}</code></td>
+        <td>An alphabetic character</td>
+    </tr>
+    <tr>
+        <td><code>\p{Sc}</code></td>
+        <td>A currency symbol</td>
+    </tr>
+    <tr>
+        <td><code>\P{InGreek}</code></td>
+        <td>Any character except one in the Greek block (negation)</td>
+    </tr>
+    <tr>
+        <td><code>[\p{L}&amp;&amp;[^\p{Lu}]]&nbsp;</code></td>
+        <td>Any letter except an uppercase letter (subtraction)</td>
+    </tr>
+
+    </tbody>
+</table>
+
+<table class="ops">
+    <caption>Logical operators</caption>
+    <tbody>
+    <tr>
+        <td><em>XY</em></td>
+        <td><em>X</em> followed by <em>Y</em></td>
+    </tr>
+    <tr>
+        <td><em>X</em><code>|</code><em>Y</em></td>
+        <td>Either <em>X</em> or <em>Y</em></td>
+    </tr>
+    <tr>
+        <td><code>(</code><em>X</em><code>)</code></td>
+        <td><em>X</em>, as a capturing group</td>
+    </tr>
+
+    </tbody>
+</table>
+
+<table class="ops">
+    <caption>Greedy quantifiers</caption>
+    <tbody>
+    <tr>
+        <td><em>X</em><code>?</code></td>
+        <td><em>X</em>, once or not at all</td>
+    </tr>
+    <tr>
+        <td><em>X</em><code>*</code></td>
+        <td><em>X</em>, zero or more times</td>
+    </tr>
+    <tr>
+        <td><em>X</em><code>+</code></td>
+        <td><em>X</em>, one or more times</td>
+    </tr>
+    <tr>
+        <td><em>X</em><code>{</code><em>n</em><code>}</code></td>
+        <td><em>X</em>, exactly <em>n</em> times</td>
+    </tr>
+    <tr>
+        <td><em>X</em><code>{</code><em>n</em><code>,}</code></td>
+        <td><em>X</em>, at least <em>n</em> times</td>
+    </tr>
+    <tr>
+        <td><em>X</em><code>{</code><em>n</em><code>,</code><em>m</em><code>}</code></td>
+        <td><em>X</em>, at least <em>n</em> but not more than <em>m</em> times</td>
+    </tr>
+
+    </tbody>
+</table>
+
+<table class="ops">
+    <caption>Reluctant quantifiers</caption>
+    <tbody>
+
+    <tr>
+        <td><em>X</em><code>??</code></td>
+        <td><em>X</em>, once or not at all</td>
+    </tr>
+    <tr>
+        <td><em>X</em><code>*?</code></td>
+        <td><em>X</em>, zero or more times</td>
+    </tr>
+    <tr>
+        <td><em>X</em><code>+?</code></td>
+        <td><em>X</em>, one or more times</td>
+    </tr>
+    <tr>
+        <td><em>X</em><code>{</code><em>n</em><code>}?</code></td>
+        <td><em>X</em>, exactly <em>n</em> times</td>
+    </tr>
+    <tr>
+        <td><em>X</em><code>{</code><em>n</em><code>,}?</code></td>
+        <td><em>X</em>, at least <em>n</em> times</td>
+    </tr>
+    <tr>
+        <td><em>X</em><code>{</code><em>n</em><code>,</code><em>m</em><code>}?</code></td>
+        <td><em>X</em>, at least <em>n</em> but not more than <em>m</em> times</td>
+    </tr>
+
+    </tbody>
+</table>
+
+<table class="ops">
+    <caption>Possessive quantifiers</caption>
+    <tbody>
+
+    <tr>
+        <td><em>X</em><code>?+</code></td>
+        <td><em>X</em>, once or not at all</td>
+    </tr>
+    <tr>
+        <td><em>X</em><code>*+</code></td>
+        <td><em>X</em>, zero or more times</td>
+    </tr>
+    <tr>
+        <td><em>X</em><code>++</code></td>
+        <td><em>X</em>, one or more times</td>
+    </tr>
+    <tr>
+        <td><em>X</em><code>{</code><em>n</em><code>}+</code></td>
+        <td><em>X</em>, exactly <em>n</em> times</td>
+    </tr>
+    <tr>
+        <td><em>X</em><code>{</code><em>n</em><code>,}+</code></td>
+        <td><em>X</em>, at least <em>n</em> times</td>
+    </tr>
+    <tr>
+        <td><em>X</em><code>{</code><em>n</em><code>,</code><em>m</em><code>}+</code></td>
+        <td><em>X</em>, at least <em>n</em> but not more than <em>m</em> times</td>
+    </tr>
+
+    </tbody>
+</table>
+
+<table class="other">
+    <caption>Boundary matchers</caption>
+    <tbody>
+    <tr>
+        <td><code>^</code></td>
+        <td>The beginning of a line</td>
+    </tr>
+    <tr>
+        <td><code>$</code></td>
+        <td>The end of a line</td>
+    </tr>
+    <tr>
+        <td><code>\b</code></td>
+        <td>A word boundary</td>
+    </tr>
+    <tr>
+        <td><code>\B</code></td>
+        <td>A non-word boundary</td>
+    </tr>
+    <tr>
+        <td><code>\A</code></td>
+        <td>The beginning of the input</td>
+    </tr>
+    <tr>
+        <td><code>\G</code></td>
+        <td>The end of the previous match</td>
+    </tr>
+    <tr>
+        <td><code>\Z</code></td>
+        <td>The end of the input but for the final terminator, if&nbsp;any
+        </td>
+    </tr>
+    <tr>
+        <td><code>\z</code></td>
+        <td>The end of the input</td>
+    </tr>
+
+    </tbody>
+</table>
+
+
+<table class="other">
+    <caption>Back references</caption>
+    <tbody>
+
+    <tr>
+        <td><code>\</code><em>n</em></td>
+        <td>Whatever the <em>n</em><sup>th</sup>capturing group matched
+        </td>
+    </tr>
+
+    <tr>
+        <td><code>\</code><em>k</em>&lt;<em>name</em>&gt;</td>
+        <td>Whatever the named-capturing group "name" matched
+        </td>
+    </tr>
+
+    </tbody>
+</table>
+
+<table class="other">
+    <caption>Quotation</caption>
+    <tbody>
+
+    <tr>
+        <td><code>\</code></td>
+        <td>Nothing, but quotes the following character</td>
+    </tr>
+    <tr>
+        <td><code>\Q</code></td>
+        <td>Nothing, but quotes all characters until <code>\E</code></td>
+    </tr>
+    <tr>
+        <td><code>\E</code></td>
+        <td>Nothing, but ends quoting started by <code>\Q</code></td>
+    </tr>
+    <!-- Metachars: !$()*+.<>?[\]^{|} -->
+
+    </tbody>
+</table>
+
+<table class="special">
+    <caption>Special constructs (named-capturing and non-capturing)</caption>
+    <tbody>
+
+    <tr>
+        <td><code>(?&lt;name&gt;</code><em>X</em><code>)</code></td>
+        <td><em>X</em>, as a named-capturing group</td>
+    </tr>
+    <tr>
+        <td><code>(?:</code><em>X</em><code>)</code></td>
+        <td><em>X</em>, as a non-capturing group</td>
+    </tr>
+    <tr>
+        <td><code>(?idmsuxU)&nbsp;</code><br><code>(?-idmsuxU)&nbsp;</code></td>
+        <td>matches nothing, but turns match flags
+            <span class="tooltip">i<span class="tooltiptext">Case-insensitive matching</span></span>
+            <span class="tooltip">d<span class="tooltiptext">Unix lines mode</span></span>
+            <span class="tooltip">m<span class="tooltiptext">Multiline mode</span></span>
+            <span class="tooltip">s<span class="tooltiptext">Dotall mode</span></span>
+            <span class="tooltip">u<span class="tooltiptext">Unicode-aware case folding</span></span>
+            <span class="tooltip">x<span class="tooltiptext">Permit whitespace and comments in pattern</span></span>
+            <span class="tooltip">U<span class="tooltiptext">Unicode character class</span></span>
+            on - off
+        </td>
+    </tr>
+    <tr>
+        <td><code>(?idmsux:</code><em>X</em><code>)</code><br><code>(?-idmsux:</code><em>X</em><code>)</code></td>
+        <td>non-capturing group</a> with the
+            given flags
+            <span class="tooltip">i<span class="tooltiptext">Case-insensitive matching</span></span>
+            <span class="tooltip">d<span class="tooltiptext">Unix lines mode</span></span>
+            <span class="tooltip">m<span class="tooltiptext">Multiline mode</span></span>
+            <span class="tooltip">s<span class="tooltiptext">Dotall mode</span></span>
+            <span class="tooltip">u<span class="tooltiptext">Unicode-aware case folding</span></span>
+            <span class="tooltip">x<span class="tooltiptext">Permit whitespace and comments in pattern</span></span>
+            on - off
+        </td>
+    </tr>
+    <tr>
+        <td><code>(?=</code><em>X</em><code>)</code></td>
+        <td><em>X</em>, via zero-width positive lookahead</td>
+    </tr>
+    <tr>
+        <td><code>(?!</code><em>X</em><code>)</code></td>
+        <td><em>X</em>, via zero-width negative lookahead</td>
+    </tr>
+    <tr>
+        <td><code>(?&lt;=</code><em>X</em><code>)</code></td>
+        <td><em>X</em>, via zero-width positive lookbehind</td>
+    </tr>
+    <tr>
+        <td><code>(?&lt;!</code><em>X</em><code>)</code></td>
+        <td><em>X</em>, via zero-width negative lookbehind</td>
+    </tr>
+    <tr>
+        <td><code>(?&gt;</code><em>X</em><code>)</code></td>
+        <td><em>X</em>, as an <a href="https://stackoverflow.com/a/50146523" target="_blank">independent, non-capturing
+            group</a></td>
+    </tr>
+
+    </tbody>
+</table>
+<p>
+    Source: <a href="https://docs.oracle.com/javase/8/docs/api/java/util/regex/Pattern.html" target="_blank">Pattern
+    Class (Java 8 JavaDoc)</a>
+</p>
+</body>
+</html>
+
